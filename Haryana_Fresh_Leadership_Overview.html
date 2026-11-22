@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Haryana Fresh Digital Platform — Leadership Overview</title>
+<style>
+  :root {
+    --gt-purple-dark: #2e1146;
+    --gt-purple: #5b1f7a;
+    --gt-purple-light: #7d3aa3;
+    --gt-orange: #f5a623;
+    --gt-orange-dark: #d97e0e;
+    --ink: #1f1330;
+    --white: #ffffff;
+    --good: #1e9e6b;
+    --bad: #d84343;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%;
+    background: #0d0614;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+  }
+  .stage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    max-width: 960px;
+    max-height: 540px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--gt-purple-dark), var(--gt-purple) 60%, var(--gt-purple-light));
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0,0,0,0.6);
+  }
+  @media (min-width: 960px) {
+    .stage { width: 960px; height: 540px; top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%); }
+  }
+
+  .glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,166,35,0.16), transparent 70%);
+    top: -220px; right: -220px;
+    pointer-events: none;
+  }
+
+  .progress-track {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 5px;
+    background: rgba(255,255,255,0.12);
+    z-index: 50;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gt-orange), var(--gt-orange-dark));
+    animation: fillbar 60s linear forwards;
+  }
+  @keyframes fillbar { from { width: 0%; } to { width: 100%; } }
+
+  .brand {
+    position: absolute;
+    top: 18px; left: 24px;
+    display: flex; align-items: center; gap: 9px;
+    z-index: 40;
+  }
+  .brand .mark {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--gt-orange);
+    color: white; font-weight: 800; font-size: 16px;
+    display: grid; place-items: center;
+    box-shadow: 0 4px 14px rgba(245,166,35,0.4);
+  }
+  .brand .txt { line-height: 1.1; }
+  .brand .txt .n1 { color: white; font-weight: 700; font-size: 12px; }
+  .brand .txt .n2 { color: rgba(255,255,255,0.55); font-size: 7px; letter-spacing: 1.5px; font-weight: 600; }
+  .prepared {
+    position: absolute; top: 22px; right: 24px;
+    color: rgba(255,255,255,0.45); font-size: 9.5px; font-weight: 500;
+    z-index: 40;
+  }
+
+  .scene {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 62px 54px 32px;
+    opacity: 0;
+  }
+  .scene .eyebrow {
+    color: var(--gt-orange);
+    font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .scene h1 {
+    color: white; font-size: 27px; font-weight: 800; line-height: 1.18;
+    max-width: 760px;
+  }
+  .scene p.sub {
+    color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 10px; max-width: 620px; line-height: 1.5;
+  }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+  .stat {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 11px; padding: 12px 14px;
+  }
+  .stat .v { color: white; font-size: 20px; font-weight: 800; }
+  .stat .l { color: rgba(255,255,255,0.6); font-size: 9.5px; margin-top: 3px; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .pill {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+    color: white; font-size: 11.5px; font-weight: 600;
+    padding: 7px 13px; border-radius: 999px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gt-orange); }
+
+  .modules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+  .module-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 11px; padding: 12px;
+  }
+  .module-card .num { color: var(--gt-orange); font-size: 10px; font-weight: 800; }
+  .module-card .t { color: white; font-size: 12px; font-weight: 700; margin-top: 5px; line-height: 1.3; }
+
+  .loop { display: flex; align-items: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .loop .node {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: white; font-size: 11.5px; font-weight: 700;
+    padding: 9px 14px; border-radius: 9px;
+  }
+  .loop .arrow { color: var(--gt-orange); font-size: 16px; font-weight: 800; }
+
+  .closer .big { color: white; font-size: 24px; font-weight: 800; line-height: 1.25; }
+  .closer .big span { color: var(--gt-orange); }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 16px;
+    background: white; color: var(--gt-purple);
+    font-weight: 700; font-size: 12px;
+    padding: 10px 20px; border-radius: 9px;
+    width: fit-content;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  /* ---------- App-mockup frame (recreates real product chrome) ---------- */
+  .app-frame {
+    display: flex;
+    background: #f6f4fa;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    width: 100%;
+    height: 340px;
+    margin-top: 8px;
+  }
+  .app-sidebar {
+    width: 150px; flex-shrink: 0;
+    background: linear-gradient(180deg, var(--gt-purple-dark), var(--gt-purple));
+    padding: 12px 8px;
+  }
+  .app-sidebar .logo { display: flex; align-items: center; gap: 6px; padding: 4px 6px 12px; }
+  .app-sidebar .logo .m { width: 18px; height: 18px; border-radius: 5px; background: var(--gt-orange); }
+  .app-sidebar .logo .t { color: white; font-size: 9px; font-weight: 700; }
+  .app-nav-item {
+    color: rgba(255,255,255,0.75); font-size: 8.5px; font-weight: 600;
+    padding: 6px 8px; border-radius: 6px; margin-bottom: 3px;
+  }
+  .app-nav-item.active { background: white; color: var(--gt-purple); }
+  .app-main { flex: 1; padding: 14px 18px; overflow: hidden; }
+  .app-topbar { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+  .app-role-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: white; border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 8px; padding: 4px 9px 4px 4px;
+  }
+  .app-role-chip .av { width: 16px; height: 16px; border-radius: 50%; background: var(--gt-purple); }
+  .app-role-chip .n { font-size: 8px; font-weight: 700; color: var(--ink); }
+  .app-title { font-size: 15px; font-weight: 800; color: var(--ink); }
+  .app-subtitle { font-size: 9.5px; color: #7a7186; margin-top: 2px; margin-bottom: 12px; }
+  .app-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .app-stat-card {
+    background: white; border: 1px solid rgba(0,0,0,0.06); border-radius: 9px; padding: 8px 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .app-stat-card .l { font-size: 7.5px; color: #9089a0; font-weight: 600; text-transform: uppercase; }
+  .app-stat-card .v { font-size: 15px; font-weight: 800; color: var(--ink); margin-top: 2px; }
+  .app-panel { background: white; border: 1px solid rgba(0,0,0,0.06); border-radius: 9px; padding: 10px 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .app-panel-title { font-size: 9.5px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .app-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #f0edf5; font-size: 8.5px; }
+  .app-row:last-child { border-bottom: none; }
+  .app-row .name { font-weight: 600; color: var(--ink); }
+  .app-row .meta { color: #9089a0; font-size: 7.5px; }
+  .app-badge { font-size: 7px; font-weight: 700; padding: 2px 7px; border-radius: 999px; }
+  .app-badge.good { background: rgba(30,158,107,0.12); color: var(--good); }
+  .app-badge.bad { background: rgba(216,67,67,0.12); color: var(--bad); }
+  .app-badge.orange { background: rgba(245,166,35,0.14); color: var(--gt-orange-dark); }
+  .app-badge.purple { background: rgba(91,31,122,0.1); color: var(--gt-purple); }
+  .two-col { display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 70px; margin-top: 6px; }
+  .bar-chart .bar { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, var(--gt-orange), var(--gt-orange-dark)); position: relative; }
+  .bar-chart .bar.alt { background: linear-gradient(180deg, var(--gt-purple-light), var(--gt-purple)); }
+  .bar-chart .bar .lbl { position: absolute; bottom: -13px; left: 0; right: 0; text-align: center; font-size: 6.5px; color: #9089a0; font-weight: 600; }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes sceneIn {
+    0% { opacity: 0; transform: translateY(14px) scale(0.99); }
+    9% { opacity: 1; transform: translateY(0) scale(1); }
+    90% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-8px) scale(1.005); }
+  }
+
+  /* 10 scenes across 60s, 6s each */
+  #s1  { animation: sceneIn 6.3s ease forwards; animation-delay: 0s; }
+  #s2  { animation: sceneIn 6.3s ease forwards; animation-delay: 6s; }
+  #s3  { animation: sceneIn 6.3s ease forwards; animation-delay: 12s; }
+  #s4  { animation: sceneIn 6.3s ease forwards; animation-delay: 18s; }
+  #s5  { animation: sceneIn 6.3s ease forwards; animation-delay: 24s; }
+  #s6  { animation: sceneIn 6.3s ease forwards; animation-delay: 30s; }
+  #s7  { animation: sceneIn 6.3s ease forwards; animation-delay: 36s; }
+  #s8  { animation: sceneIn 6.3s ease forwards; animation-delay: 42s; }
+  #s9  { animation: sceneIn 6.3s ease forwards; animation-delay: 48s; }
+  #s10 { animation: sceneIn 7.2s ease forwards; animation-delay: 54s; }
+
+  .replay-btn {
+    position: absolute; bottom: 14px; right: 18px; z-index: 60;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    color: white; font-size: 10.5px; font-weight: 600;
+    padding: 6px 13px; border-radius: 999px; cursor: pointer;
+    opacity: 0; animation: fadeIn 0.6s ease forwards; animation-delay: 60.2s;
+  }
+  .replay-btn:hover { background: rgba(255,255,255,0.22); }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <div class="glow"></div>
+  <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+  <div class="brand">
+    <div class="mark">H</div>
+    <div class="txt"><div class="n1">Haryana Fresh</div><div class="n2">DIGITAL PLATFORM</div></div>
+  </div>
+  <div class="prepared">Prepared by Grant Thornton Bharat</div>
+
+  <!-- 1: Intro -->
+  <div class="scene" id="s1">
+    <div class="eyebrow">Department of Horticulture, Haryana</div>
+    <h1>One connected platform for Haryana's<br/>horticulture value chain</h1>
+    <p class="sub">Farmers, Producer Groups, buyers and government — on a single digital backbone, built module by module against the approved FRS.</p>
+  </div>
+
+  <!-- 2: Statewide numbers -->
+  <div class="scene" id="s2">
+    <div class="eyebrow">Statewide Visibility</div>
+    <h1>Real-time reach, from day one</h1>
+    <div class="stats">
+      <div class="stat"><div class="v">3</div><div class="l">PRODUCER GROUPS</div></div>
+      <div class="stat"><div class="v">15</div><div class="l">REGISTERED FARMERS / PG MEMBERS</div></div>
+      <div class="stat"><div class="v">4</div><div class="l">REGISTERED BUYERS</div></div>
+      <div class="stat"><div class="v">6</div><div class="l">HARYANA DISTRICTS COVERED</div></div>
+    </div>
+  </div>
+
+  <!-- 3: PMU Dashboard view -->
+  <div class="scene" id="s3">
+    <div class="eyebrow">Application View — PMU / DPMU Dashboard</div>
+    <h1 style="font-size:19px;">Statewide oversight, one screen for leadership</h1>
+    <div class="app-frame">
+      <div class="app-sidebar">
+        <div class="logo"><div class="m"></div><div class="t">HARYANA FRESH</div></div>
+        <div class="app-nav-item active">Dashboard</div>
+        <div class="app-nav-item">Farmer / PG Profile</div>
+        <div class="app-nav-item">Marketplace Listings</div>
+        <div class="app-nav-item">MIS Dashboard</div>
+        <div class="app-nav-item">Integration Sync Status</div>
+      </div>
+      <div class="app-main">
+        <div class="app-topbar"><div class="app-role-chip"><div class="av"></div><div class="n">Dr. Rajeev Malhotra · DPMU</div></div></div>
+        <div class="app-title">Programme Management Unit Overview</div>
+        <div class="app-subtitle">Statewide view across Producer Groups, farmers and integration health</div>
+        <div class="app-stat-row">
+          <div class="app-stat-card"><div class="l">Producer Groups</div><div class="v">3</div></div>
+          <div class="app-stat-card"><div class="l">Registered Farmers</div><div class="v">15</div></div>
+          <div class="app-stat-card"><div class="l">Avg. Data Completeness</div><div class="v">75%</div></div>
+          <div class="app-stat-card"><div class="l">Integration Alerts</div><div class="v">1</div></div>
+        </div>
+        <div class="app-panel">
+          <div class="app-panel-title">Government Integration Status (Simulated adapters)</div>
+          <div class="app-row"><span class="name">Farm Trace</span><span class="app-badge good">Synced</span></div>
+          <div class="app-row"><span class="name">e-Girdwari</span><span class="app-badge bad">Sync Failed</span></div>
+          <div class="app-row"><span class="name">e-Kharid</span><span class="app-badge good">Synced</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: Marketplace / Auctions view -->
+  <div class="scene" id="s4">
+    <div class="eyebrow">Application View — Marketplace &amp; Auctions</div>
+    <h1 style="font-size:19px;">From listing to order, fully traceable</h1>
+    <div class="app-frame">
+      <div class="app-sidebar">
+        <div class="logo"><div class="m"></div><div class="t">HARYANA FRESH</div></div>
+        <div class="app-nav-item">Marketplace Listings</div>
+        <div class="app-nav-item active">Auctions &amp; Bulk Bidding</div>
+        <div class="app-nav-item">Orders &amp; Fulfilment</div>
+        <div class="app-nav-item">Live Price Board</div>
+      </div>
+      <div class="app-main">
+        <div class="app-topbar"><div class="app-role-chip"><div class="av"></div><div class="n">Anjali Mehta · Buyer</div></div></div>
+        <div class="app-title">Kinnow — Bulk Bidding, Karnal Kinnow-Vegetable Growers PG</div>
+        <div class="app-subtitle">Grade A · 120 Qtl · Closes in 4h 12m</div>
+        <div class="app-panel" style="margin-bottom:8px;">
+          <div class="app-panel-title">Current Highest Bid</div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:20px; font-weight:800; color:var(--ink);">₹2,340 <span style="font-size:9px; color:#9089a0; font-weight:600;">/ Qtl</span></div>
+            <span class="app-badge orange">FreshMart Retail Chain</span>
+          </div>
+        </div>
+        <div class="app-panel">
+          <div class="app-panel-title">Recent Orders — Status History</div>
+          <div class="app-row"><span class="name">ORD-1042 · Guava</span><span class="app-badge purple">In Transit</span></div>
+          <div class="app-row"><span class="name">ORD-1039 · Tomato</span><span class="app-badge good">Delivered</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: Six personas -->
+  <div class="scene" id="s5">
+    <div class="eyebrow">Built Around Every Stakeholder</div>
+    <h1>Every persona, one platform</h1>
+    <div class="pills">
+      <div class="pill"><span class="dot"></span>Farmer / PG Member</div>
+      <div class="pill"><span class="dot"></span>PG Manager / Aggregator</div>
+      <div class="pill"><span class="dot"></span>Packhouse Operator</div>
+      <div class="pill"><span class="dot"></span>Buyer</div>
+      <div class="pill"><span class="dot"></span>DoH / PMU / DPMU Official</div>
+      <div class="pill"><span class="dot"></span>System Administrator</div>
+    </div>
+    <p class="sub" style="margin-top:20px;">Each role sees only its own scoped data and navigation — role-based access control from day one.</p>
+  </div>
+
+  <!-- 6: Inventory & Benefits view -->
+  <div class="scene" id="s6">
+    <div class="eyebrow">Application View — Inventory &amp; Benefit Management</div>
+    <h1 style="font-size:19px;">Lot to dispatch, with DBT visibility</h1>
+    <div class="app-frame">
+      <div class="app-sidebar">
+        <div class="logo"><div class="m"></div><div class="t">HARYANA FRESH</div></div>
+        <div class="app-nav-item active">Inventory &amp; Lot Tracking</div>
+        <div class="app-nav-item">Transaction Archive</div>
+        <div class="app-nav-item">Benefit Disbursal — Consolidated</div>
+      </div>
+      <div class="app-main">
+        <div class="app-topbar"><div class="app-role-chip"><div class="av"></div><div class="n">Vinod Kumar · Packhouse</div></div></div>
+        <div class="app-title">Karnal Integrated Pack House — Lot Tracking</div>
+        <div class="app-subtitle">18 audited transaction records · 9 benefit / DBT records linked</div>
+        <div class="app-panel" style="margin-bottom:8px;">
+          <div class="app-panel-title">Lot LOT-2031 · Kinnow Grade A</div>
+          <div class="app-row"><span class="name">Harvested → Graded → Packed</span><span class="app-badge good">Dispatched</span></div>
+        </div>
+        <div class="app-panel">
+          <div class="app-panel-title">District Benefit Disbursal — Consolidated</div>
+          <div class="app-row"><span class="name">Karnal</span><span class="meta">₹1.8 L disbursed</span></div>
+          <div class="app-row"><span class="name">Sirsa</span><span class="meta">₹0.9 L disbursed</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7: MIS Dashboard view -->
+  <div class="scene" id="s7">
+    <div class="eyebrow">Application View — MIS &amp; Reporting</div>
+    <h1 style="font-size:19px;">Jurisdiction-level dashboards, export on demand</h1>
+    <div class="app-frame">
+      <div class="app-sidebar">
+        <div class="logo"><div class="m"></div><div class="t">HARYANA FRESH</div></div>
+        <div class="app-nav-item active">MIS Dashboard</div>
+        <div class="app-nav-item">Reports &amp; Export</div>
+        <div class="app-nav-item">Data Completeness</div>
+      </div>
+      <div class="app-main">
+        <div class="app-topbar"><div class="app-role-chip"><div class="av"></div><div class="n">Dr. Rajeev Malhotra · DPMU</div></div></div>
+        <div class="app-title">MIS Dashboard — District: All</div>
+        <div class="app-subtitle">Marketplace, inventory, benefit &amp; community activity in one view</div>
+        <div class="two-col">
+          <div class="app-panel">
+            <div class="app-panel-title">Order Volume by District</div>
+            <div class="bar-chart">
+              <div class="bar" style="height:55%;"><span class="lbl">Karnal</span></div>
+              <div class="bar alt" style="height:70%;"><span class="lbl">Sirsa</span></div>
+              <div class="bar" style="height:40%;"><span class="lbl">Kurukshetra</span></div>
+              <div class="bar alt" style="height:30%;"><span class="lbl">Ambala</span></div>
+            </div>
+          </div>
+          <div class="app-panel">
+            <div class="app-panel-title">Export Report</div>
+            <div class="app-row"><span class="name">Marketplace Summary</span><span class="app-badge orange">CSV</span></div>
+            <div class="app-row"><span class="name">Benefit Disbursal</span><span class="app-badge orange">CSV</span></div>
+            <div class="app-row"><span class="name">Community Activity</span><span class="app-badge orange">JSON</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8: Modules -->
+  <div class="scene" id="s8">
+    <div class="eyebrow">Six Connected Modules</div>
+    <h1>Farm to market, fully governed</h1>
+    <div class="modules">
+      <div class="module-card"><div class="num">01</div><div class="t">Crops &amp; Data Hub</div></div>
+      <div class="module-card"><div class="num">02</div><div class="t">E-Marketplace &amp; Trading</div></div>
+      <div class="module-card"><div class="num">03</div><div class="t">Inventory &amp; Benefits</div></div>
+      <div class="module-card"><div class="num">04</div><div class="t">Stakeholder Collaboration</div></div>
+      <div class="module-card"><div class="num">05</div><div class="t">Market Intelligence</div></div>
+      <div class="module-card"><div class="num">06</div><div class="t">MIS &amp; Reporting</div></div>
+    </div>
+  </div>
+
+  <!-- 9: The loop -->
+  <div class="scene" id="s9">
+    <div class="eyebrow">The Differentiator</div>
+    <h1>A market feedback loop that closes itself</h1>
+    <div class="loop">
+      <div class="node">Crop Plan</div><div class="arrow">→</div>
+      <div class="node">Listing</div><div class="arrow">→</div>
+      <div class="node">Order</div><div class="arrow">→</div>
+      <div class="node">Realisation</div><div class="arrow">→</div>
+      <div class="node">Next Season Plan</div>
+    </div>
+    <p class="sub" style="margin-top:22px;">Producer Groups plan against what actually sold last season — not guesswork.</p>
+  </div>
+
+  <!-- 10: Closer -->
+  <div class="scene closer" id="s10">
+    <div class="eyebrow">Ready for Leadership Review</div>
+    <div class="big">Full visibility, from the<br/><span>field</span> to the <span>boardroom</span>.</div>
+    <div class="cta-btn">Haryana Fresh Digital Platform</div>
+  </div>
+
+  <button class="replay-btn" onclick="location.reload()">↻ Replay</button>
+</div>
+
+</body>
+</html>
