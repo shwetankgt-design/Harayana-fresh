@@ -44,6 +44,7 @@ import type {
   TransactionRecord,
   TransactionStatus,
   TransactionType,
+  ShepPlan,
 } from "./types";
 
 // ---------- Deterministic PRNG (mulberry32) ----------
@@ -416,7 +417,7 @@ export function latestSyncBySystem(): { system: SyncSystem; latest: SyncLogEntry
 const GRADES: Grade[] = ["Grade A (Premium)", "Grade B (Standard)", "Grade C (Processing)"];
 const ALL_CHANNELS: SalesChannel[] = ["Retail", "Institutional", "Digital Commerce", "Wholesale"];
 
-const BASE_PRICE_PER_QTL: Record<Crop, number> = {
+export const BASE_PRICE_PER_QTL: Record<Crop, number> = {
   Kinnow: 2200,
   Guava: 1800,
   Tomato: 1200,
@@ -1374,3 +1375,57 @@ export const fulfilmentCenterStats: FulfilmentCenterStat[] = FULFILMENT_CENTER_S
     fulfilment_rate_pct: Math.round((Math.min(baseDemand, fulfilled) / baseDemand) * 100),
   };
 });
+
+// ==================== Round 2: SHEP pre-market business plans ====================
+// Static (no RNG draws) so adding them does not shift any seeded number. All values are indicative.
+// Tomato is the single demo crop, so the same story runs through every persona.
+export const SHEP_PLANS: ShepPlan[] = [
+  {
+    shep_plan_id: "SHEP-001",
+    pg_id: "PG-001",
+    crop: "Tomato",
+    variety: "Hybrid, fresh market",
+    target_market: "Retail chain (FreshMart)",
+    buyer_id: "BYR-001",
+    buyer_requirement: "Grade A tomato, 150 Qtl, retail channel, Jan delivery",
+    indicative_demand_qtl: 150,
+    indicative_price_range_per_qtl: { min: 1100, max: 1400 },
+    market_window: "10-25 Jan",
+    planned_acreage: 6,
+    expected_production_qtl: 180,
+    preferred_channel: "Retail",
+    status: "Agreed",
+  },
+  {
+    shep_plan_id: "SHEP-002",
+    pg_id: "PG-003",
+    crop: "Tomato",
+    variety: "Hybrid, processing",
+    target_market: "Institutional / HORECA (Hospitality Supply Partners)",
+    buyer_id: "BYR-002",
+    buyer_requirement: "Grade B tomato, 120 Qtl, institutional channel, Feb delivery",
+    indicative_demand_qtl: 120,
+    indicative_price_range_per_qtl: { min: 1000, max: 1250 },
+    market_window: "Feb",
+    planned_acreage: 4.5,
+    expected_production_qtl: 135,
+    preferred_channel: "Institutional",
+    status: "Under Execution",
+  },
+  {
+    shep_plan_id: "SHEP-003",
+    pg_id: "PG-010",
+    crop: "Tomato",
+    variety: "Hybrid, fresh market",
+    target_market: "Haryana Fresh retail (brand channel)",
+    buyer_id: null,
+    buyer_requirement: "Grade A tomato, 60 Qtl, Haryana Fresh retail, Dec delivery",
+    indicative_demand_qtl: 60,
+    indicative_price_range_per_qtl: { min: 1200, max: 1500 },
+    market_window: "Dec",
+    planned_acreage: 2.5,
+    expected_production_qtl: 75,
+    preferred_channel: "Retail",
+    status: "Draft",
+  },
+];

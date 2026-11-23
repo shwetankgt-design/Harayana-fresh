@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { TrendingUp, TrendingDown, Minus, Building2, PlusCircle } from "lucide-react";
-import { Badge, Card, EmptyState, PageHeader, SectionHeader, StatCard, Table, Td, Th } from "../components/ui";
+import { Badge, Card, EmptyState, IndicativeTag, PageHeader, SectionHeader, StatCard, Table, Td, Th } from "../components/ui";
+import { MarketIntelligenceInputs, WhySignal } from "./MarketIntelligenceExplainer";
 import { useRole } from "../lib/role";
 import {
   marketSignals,
@@ -41,8 +42,8 @@ export default function MarketSignalsModule() {
     return (
       <div>
         <PageHeader
-          title="Market Signals for Your Producer Group"
-          subtitle="Plain-language demand and price pointers, drawn from recent orders and prices in your district"
+          title="What the market is asking for"
+          subtitle="Prices and buyer interest for your crops in your district, from recent orders on this platform"
           icon={<TrendingUp size={20} />}
         />
         {relevant.length === 0 ? (
@@ -65,6 +66,9 @@ export default function MarketSignalsModule() {
                 </div>
                 <p className="text-sm text-ink leading-relaxed">{s.narrative}</p>
                 <div className="subtle mt-2">Average recent price: Rs {s.avg_price_per_qtl.toLocaleString("en-IN")}/Qtl</div>
+                <div className="subtle mt-1">
+                  Buyer interest: {seedBuyerRequirements.filter((r) => r.crop === s.crop && r.district_preference.includes(s.district)).length} open requirement(s) in {s.district}
+                </div>
               </Card>
             ))}
           </div>
@@ -242,6 +246,7 @@ function BuyerRequirementView() {
 }
 
 function SignalsAnalyticalView() {
+  const [openSignal, setOpenSignal] = useState<string | null>(null);
   const [district, setDistrict] = useState<District | "All Districts">("All Districts");
   const filtered = useMemo(
     () => (district === "All Districts" ? marketSignals : marketSignalsForDistrict(district)),
@@ -288,8 +293,9 @@ function SignalsAnalyticalView() {
         <StatCard label="Inventory Lots Tracked" value={String(inventoryLots.length)} />
       </div>
 
+      <MarketIntelligenceInputs />
       <Card className="mb-4">
-        <SectionHeader title="Pre-Market Demand / Price Signals" subtitle="Derived from recent orders and price observations, by crop and district" />
+        <SectionHeader title="Pre-Market Demand / Price Signals" subtitle="Derived from recent orders and price observations, by crop and district" right={<IndicativeTag />} />
         {filtered.length === 0 ? (
           <EmptyState icon={<TrendingUp size={20} />} title="No signals for this filter" body="Try a different district or check back once more orders are recorded." />
         ) : (
@@ -301,7 +307,11 @@ function SignalsAnalyticalView() {
             </thead>
             <tbody>
               {filtered.map((s) => (
-                <tr key={s.signal_id}>
+                <tr
+                  key={s.signal_id}
+                  onClick={() => setOpenSignal(s.signal_id)}
+                  className={`cursor-pointer hover:bg-gt-purple/5 ${openSignal === s.signal_id ? "bg-gt-purple/5" : ""}`}
+                >
                   <Td className="font-medium">{s.crop}</Td>
                   <Td>{s.district}</Td>
                   <Td><Badge tone={directionTone(s.direction)}><DirectionIcon direction={s.direction} /> {s.direction}</Badge></Td>
@@ -318,6 +328,7 @@ function SignalsAnalyticalView() {
         )}
       </Card>
 
+      <WhySignal signal={filtered.find((s) => s.signal_id === openSignal) ?? null} />
       <Card>
         <SectionHeader title="Production / Inventory Aggregate, by Crop" subtitle="Rolled up from inventory lots across all Producer Groups and Pack Houses" />
         <Table>

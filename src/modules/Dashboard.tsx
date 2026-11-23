@@ -15,6 +15,7 @@ import {
   programmeItems,
 } from "../data/seed";
 import { getAdapterStatuses } from "../lib/adapters";
+import { OutcomeKpiRow } from "../components/OutcomeKpis";
 import { formatDate } from "../lib/format";
 
 export default function Dashboard() {
@@ -30,6 +31,7 @@ export default function Dashboard() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
           <StatCard label="Land Holding" value={`${farmer.land_holding_acres} acres`} />
           <StatCard label="Active Crop Plans" value={String(myPlans.length)} />
+          <StatCard label="Your expected harvest" value={`${myPlans.reduce((a, p) => a + p.expected_yield_qtl, 0).toLocaleString("en-IN")} Qtl`} />
           <StatCard label="Affiliation" value={farmer.affiliation_status} tone={farmer.affiliation_status === "Active" ? "good" : "warn"} />
           <StatCard label="Profile Completeness" value={`${farmer.data_completeness_pct}%`} tone={farmer.data_completeness_pct >= 80 ? "good" : "warn"} />
         </div>
@@ -81,7 +83,7 @@ export default function Dashboard() {
     const linkedPlans = cropPlans.filter((cp) => linkedFarmers.some((f) => f.farmer_id === cp.farmer_id));
     return (
       <div>
-        <PageHeader title={ph.name} subtitle={`${ph.district} district · ${ph.capacity_mt_per_day} MT/day capacity`} icon={<Package size={20} />} />
+        <PageHeader title={ph.name} subtitle={`${ph.district} district · ${ph.capacity_mt_per_day} MT/day capacity (${(ph.capacity_mt_per_day * 10).toLocaleString("en-IN")} Qtl/day; 1 MT = 10 Qtl)`} icon={<Package size={20} />} />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
           <StatCard label="Linked Producer Groups" value={String(linkedPgs.length)} />
           <StatCard label="Linked Farmers" value={String(linkedFarmers.length)} />
@@ -152,6 +154,8 @@ export default function Dashboard() {
         subtitle="Statewide view across Producer Groups, farmers and integration health"
         icon={<LayoutDashboard size={20} />}
       />
+      <OutcomeKpiRow />
+
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
         <StatCard label="Producer Groups" value={String(producerGroups.length)} />
         <StatCard label="Registered Farmers" value={String(farmerMembers.length)} />

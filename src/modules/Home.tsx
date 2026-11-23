@@ -127,7 +127,7 @@ export default function Home() {
       {/* Live stats strip */}
       <div className="max-w-6xl mx-auto px-6 -mt-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <Stat icon={Users} value={String(activeFarmers)} label="Active Farmers / PG Members" />
+          <Stat icon={Users} value={`${activeFarmers} of ${farmerMembers.length}`} label="Active of registered farmers / PG members" />
           <Stat icon={Sprout} value={String(producerGroups.length)} label="Producer Groups" />
           <Stat icon={Building2} value={String(buyers.length)} label="Registered Buyers" />
           <Stat icon={Package} value={String(packhouses.length)} label="Linked Packhouses" />

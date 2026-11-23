@@ -448,6 +448,31 @@ export interface ReportAccessLogEntry {
   action: "Viewed" | "Exported CSV" | "Exported JSON";
 }
 
+// ==================== Round 2: SHEP pre-market, PG production plan, outcome KPIs, QC ====================
+
+export type ShepPlanStatus = "Draft" | "Agreed" | "Under Execution";
+
+// SHEP (pre-market) business plan: built from buyer demand and market survey before any crop is sown.
+export interface ShepPlan {
+  shep_plan_id: string;
+  pg_id: string;
+  crop: Crop;
+  variety: string;
+  target_market: string;
+  buyer_id: string | null;
+  buyer_requirement: string;
+  indicative_demand_qtl: number;
+  indicative_price_range_per_qtl: { min: number; max: number };
+  market_window: string;
+  planned_acreage: number;
+  expected_production_qtl: number;
+  preferred_channel: SalesChannel;
+  status: ShepPlanStatus;
+}
+
+// Gap/surplus flag on a PG x crop production plan.
+export type PlanSignal = "Potential Surplus" | "Demand Gap / Buyer Opportunity" | "On Track";
+
 export interface FulfilmentCenterStat {
   center: string;
   demand_qtl: number;

@@ -9,7 +9,7 @@ import type { District, ForecastTrend } from "../data/types";
 function StagedBadge() {
   return (
     <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-gt-orange-dark bg-gt-orange/10 rounded-full px-2 py-0.5">
-      <FlaskConical size={10} /> Staged / Experimental
+      <FlaskConical size={10} /> Experimental / Indicative
     </span>
   );
 }
@@ -28,7 +28,7 @@ export default function ForecastModule() {
     const recs = seasonRecommendationsForPg(pg.pg_id);
     return (
       <div>
-        <PageHeader title="Next Season Recommendation" subtitle="What your Producer Group's own order history suggests for next season" icon={<Sparkles size={20} />} />
+        <PageHeader title="Your expected harvest and next season" subtitle="What your Producer Group's own order history suggests for next season" icon={<Sparkles size={20} />} />
         <div className="mb-4 flex items-start gap-2.5 rounded-xl bg-gt-orange/5 border border-gt-orange/20 p-3.5">
           <AlertTriangle size={18} className="text-gt-orange-dark shrink-0 mt-0.5" />
           <div className="text-sm text-ink">
@@ -78,7 +78,7 @@ function ForecastAnalyticalView() {
 
   return (
     <div>
-      <PageHeader title="Demand Forecasting - Staged / Experimental" subtitle="Directional glut/opportunity signals derived from seed and demo transaction data" icon={<Sparkles size={20} />} />
+      <PageHeader title="Demand Forecasting - Experimental / Indicative" subtitle="Directional glut/opportunity signals derived from seed and demo transaction data" icon={<Sparkles size={20} />} />
 
       <div className="mb-4 flex items-start gap-2.5 rounded-xl bg-gt-orange/5 border border-gt-orange/20 p-3.5">
         <AlertTriangle size={18} className="text-gt-orange-dark shrink-0 mt-0.5" />

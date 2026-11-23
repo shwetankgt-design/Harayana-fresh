@@ -135,6 +135,20 @@ export function SimulatedTag() {
   );
 }
 
+// Labels data that is simulated or illustrative rather than live or achieved.
+export function IllustrativeTag({ label = "Simulated / Illustrative" }: { label?: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-gt-orange-dark bg-gt-orange/10 rounded-full px-2 py-0.5">
+      <AlertTriangle size={10} /> {label}
+    </span>
+  );
+}
+
+// Labels model outputs (forecasts, signals, recommendations) that are directional, not validated.
+export function IndicativeTag() {
+  return <IllustrativeTag label="Experimental / Indicative" />;
+}
+
 export function Table({ children }: { children: ReactNode }) {
   return (
     <div className="overflow-x-auto -mx-4 sm:mx-0">

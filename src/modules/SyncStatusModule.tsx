@@ -5,6 +5,15 @@ import { getAdapterStatuses, getSyncHistory } from "../lib/adapters";
 import type { SyncSystem } from "../data/types";
 import { formatDateTime, timeAgo } from "../lib/format";
 
+// What each simulated source is expected to provide once connected. Nothing here is live.
+const EXPECTED_DATA: Record<SyncSystem, string> = {
+  "Farm Trace": "Farmer and PG master records",
+  "e-Girdwari": "Land and crop records (jamabandi)",
+  "e-Kharid": "Procurement and market transaction context",
+  MFMB: "Scheme and benefit (DBT) status",
+  "AgriStack/InDEA": "Farmer registry and agri-stack identifiers",
+};
+
 export default function SyncStatusModule() {
   const adapters = getAdapterStatuses();
   const [expanded, setExpanded] = useState<SyncSystem | null>(null);
@@ -46,6 +55,7 @@ export default function SyncStatusModule() {
                 subtitle={a.lastSyncedAt ? `Last run ${timeAgo(a.lastSyncedAt)}` : "No successful run recorded"}
                 right={<SyncStatusBadge status={a.status} />}
               />
+              <p className="subtle mb-3">Expected data (simulated): {EXPECTED_DATA[a.system]}</p>
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
                   <div className="subtle">Records synced</div>

@@ -73,7 +73,7 @@ export default function AdvisoryModule() {
   return (
     <div>
       <PageHeader
-        title="Advisory & Notice Publishing"
+        title={canPublish ? "Advisory & Notice Publishing" : "Advisory for you"}
         subtitle={canPublish ? "Publish crop / geography / PG-targeted advisories to farmers and PGs" : "Advisories relevant to your crops, district and Producer Group"}
         icon={<Megaphone size={20} />}
       />

@@ -30,6 +30,9 @@ import FieldDataModule from "./modules/FieldDataModule";
 import ForecastModule from "./modules/ForecastModule";
 import MISDashboardModule from "./modules/MISDashboardModule";
 import ReportsModule from "./modules/ReportsModule";
+import ShepPlanModule from "./modules/ShepPlanModule";
+import PgProductionPlanModule from "./modules/PgProductionPlanModule";
+import QualityCheckModule from "./modules/QualityCheckModule";
 
 function Protected({ children }: { children: React.ReactNode }) {
   return <Shell>{children}</Shell>;
@@ -79,6 +82,9 @@ export default function App() {
         <Route path="/forecast" element={<Protected><ForecastModule /></Protected>} />
         <Route path="/mis-dashboard" element={<Protected><MISDashboardModule /></Protected>} />
         <Route path="/reports" element={<Protected><ReportsModule /></Protected>} />
+        <Route path="/shep-plan" element={<Protected><ShepPlanModule /></Protected>} />
+        <Route path="/production-plan" element={<Protected><PgProductionPlanModule /></Protected>} />
+        <Route path="/quality-check" element={<Protected><QualityCheckModule /></Protected>} />
         <Route path="/data-quality" element={<Protected><DataCompletenessModule /></Protected>} />
         <Route path="/sync-status" element={<Protected><SyncStatusModule /></Protected>} />
         <Route path="*" element={<Navigate to="/" replace />} />

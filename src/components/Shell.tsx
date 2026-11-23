@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, UserCircle2, Users, Sprout, BookOpen, RefreshCw, Gauge, Menu, X, ChevronDown, Check, PackageSearch, Search, ClipboardList, Gavel, Activity, Boxes, Receipt, HandCoins, Landmark, MessagesSquare, Megaphone, ShieldAlert, TrendingUp, Satellite, Sparkles, FileBarChart } from "lucide-react";
+import { LayoutDashboard, UserCircle2, Users, Sprout, BookOpen, RefreshCw, Gauge, Menu, X, ChevronDown, Check, PackageSearch, Search, ClipboardList, Gavel, Activity, Boxes, Receipt, HandCoins, Landmark, MessagesSquare, Megaphone, ShieldAlert, TrendingUp, Satellite, Sparkles, FileBarChart, Target, Layers, BadgeCheck } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ROLES, useRole } from "../lib/role";
 
 const ALL_NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, roles: ["farmer", "pg_manager", "packhouse", "buyer", "pmu", "admin"] },
+  { to: "/shep-plan", label: "SHEP Market & Business Plan", icon: Target, roles: ["farmer", "pg_manager", "buyer", "pmu", "admin"] },
   { to: "/profile", label: "Farmer / PG Profile", icon: UserCircle2, roles: ["farmer", "pg_manager", "pmu", "admin"] },
   { to: "/members", label: "PG Member Management", icon: Users, roles: ["pg_manager", "pmu", "admin"] },
   { to: "/crop-plans", label: "Crop Plans", icon: Sprout, roles: ["farmer", "pg_manager", "pmu", "admin"] },
+  { to: "/production-plan", label: "PG Production & Marketing Plan", icon: Layers, roles: ["pg_manager", "pmu", "admin"] },
   { to: "/listings", label: "Marketplace Listings", icon: PackageSearch, roles: ["pg_manager", "packhouse", "pmu", "admin"] },
+  { to: "/quality-check", label: "Haryana Fresh Quality Check", icon: BadgeCheck, roles: ["packhouse", "pmu", "admin"] },
   { to: "/marketplace", label: "Marketplace Discovery", icon: Search, roles: ["buyer", "pmu", "admin"] },
   { to: "/auctions", label: "Auctions & Bulk Bidding", icon: Gavel, roles: ["pg_manager", "packhouse", "buyer", "pmu", "admin"] },
   { to: "/orders", label: "Orders & Fulfilment", icon: ClipboardList, roles: ["pg_manager", "packhouse", "buyer", "pmu", "admin"] },
