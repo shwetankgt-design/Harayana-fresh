@@ -7,7 +7,9 @@ import {
   HandCoins,
   Boxes,
   TrendingUp,
+  Map as MapIcon,
 } from "lucide-react";
+import GeoSingleViewModule from "./GeoSingleViewModule";
 import { RoleContext, ROLES } from "../lib/role";
 import Dashboard from "./Dashboard";
 import PriceBoardModule from "./PriceBoardModule";
@@ -25,6 +27,13 @@ const TABS = [
     icon: LayoutDashboard,
     role: PMU_ROLE,
     render: () => <Dashboard />,
+  },
+  {
+    key: "geo",
+    label: "Geo Single View",
+    icon: MapIcon,
+    role: PMU_ROLE,
+    render: () => <GeoSingleViewModule />,
   },
   {
     key: "karnal-pg",

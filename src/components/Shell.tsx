@@ -1,11 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, UserCircle2, Users, Sprout, BookOpen, RefreshCw, Gauge, Menu, X, ChevronDown, Check, PackageSearch, Search, ClipboardList, Gavel, Activity, Boxes, Receipt, HandCoins, Landmark, MessagesSquare, Megaphone, ShieldAlert, TrendingUp, Satellite, Sparkles, FileBarChart, Target, Layers, BadgeCheck } from "lucide-react";
+import { LayoutDashboard, UserCircle2, Users, Sprout, BookOpen, RefreshCw, Gauge, Menu, X, ChevronDown, Check, PackageSearch, Search, ClipboardList, Gavel, Activity, Boxes, Receipt, HandCoins, Landmark, MessagesSquare, Megaphone, ShieldAlert, TrendingUp, Satellite, Sparkles, FileBarChart, Target, Layers, BadgeCheck, UserPlus, Map as MapIcon, Warehouse, Database } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ROLES, useRole } from "../lib/role";
 
 const ALL_NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, roles: ["farmer", "pg_manager", "packhouse", "buyer", "pmu", "admin"] },
   { to: "/shep-plan", label: "SHEP Market & Business Plan", icon: Target, roles: ["farmer", "pg_manager", "buyer", "pmu", "admin"] },
+  { to: "/geo-view", label: "Geo Single View (Map)", icon: MapIcon, roles: ["pmu", "admin"] },
+  { to: "/farmer-registry", label: "Farmer Registry", icon: UserPlus, roles: ["pg_manager", "pmu", "admin"] },
+  { to: "/assets", label: "Asset Registry", icon: Warehouse, roles: ["packhouse", "pmu", "admin"] },
   { to: "/profile", label: "Farmer / PG Profile", icon: UserCircle2, roles: ["farmer", "pg_manager", "pmu", "admin"] },
   { to: "/members", label: "PG Member Management", icon: Users, roles: ["pg_manager", "pmu", "admin"] },
   { to: "/crop-plans", label: "Crop Plans", icon: Sprout, roles: ["farmer", "pg_manager", "pmu", "admin"] },
@@ -31,6 +34,7 @@ const ALL_NAV = [
   { to: "/reports", label: "Reports & Export", icon: FileBarChart, roles: ["pmu", "admin"] },
   { to: "/data-quality", label: "Data Completeness", icon: Gauge, roles: ["pmu", "admin"] },
   { to: "/sync-status", label: "Integration Sync Status", icon: RefreshCw, roles: ["pmu", "admin"] },
+  { to: "/master-data", label: "Haryana Master Data", icon: Database, roles: ["pmu", "admin"] },
 ];
 
 function Logo() {

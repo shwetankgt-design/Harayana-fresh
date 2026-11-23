@@ -33,6 +33,12 @@ import ReportsModule from "./modules/ReportsModule";
 import ShepPlanModule from "./modules/ShepPlanModule";
 import PgProductionPlanModule from "./modules/PgProductionPlanModule";
 import QualityCheckModule from "./modules/QualityCheckModule";
+import FarmerRegistryModule from "./modules/registry/FarmerRegistryModule";
+import FarmerSurveyWizard from "./modules/registry/FarmerSurveyWizard";
+import FarmerRecordView from "./modules/registry/FarmerRecordView";
+import AssetRegistryModule from "./modules/AssetRegistryModule";
+import GeoSingleViewModule from "./modules/GeoSingleViewModule";
+import MasterDataModule from "./modules/MasterDataModule";
 
 function Protected({ children }: { children: React.ReactNode }) {
   return <Shell>{children}</Shell>;
@@ -85,6 +91,13 @@ export default function App() {
         <Route path="/shep-plan" element={<Protected><ShepPlanModule /></Protected>} />
         <Route path="/production-plan" element={<Protected><PgProductionPlanModule /></Protected>} />
         <Route path="/quality-check" element={<Protected><QualityCheckModule /></Protected>} />
+        <Route path="/farmer-registry" element={<Protected><FarmerRegistryModule /></Protected>} />
+        <Route path="/farmer-registry/new" element={<Protected><FarmerSurveyWizard /></Protected>} />
+        <Route path="/farmer-registry/:key" element={<Protected><FarmerRecordView /></Protected>} />
+        <Route path="/farmer-registry/:key/edit" element={<Protected><FarmerSurveyWizard /></Protected>} />
+        <Route path="/assets" element={<Protected><AssetRegistryModule /></Protected>} />
+        <Route path="/geo-view" element={<Protected><GeoSingleViewModule /></Protected>} />
+        <Route path="/master-data" element={<Protected><MasterDataModule /></Protected>} />
         <Route path="/data-quality" element={<Protected><DataCompletenessModule /></Protected>} />
         <Route path="/sync-status" element={<Protected><SyncStatusModule /></Protected>} />
         <Route path="*" element={<Navigate to="/" replace />} />
