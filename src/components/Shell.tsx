@@ -8,7 +8,7 @@ const ALL_NAV = [
   { to: "/shep-plan", label: "SHEP Market & Business Plan", icon: Target, roles: ["farmer", "pg_manager", "buyer", "pmu", "admin"] },
   { to: "/geo-view", label: "Geo Single View (Map)", icon: MapIcon, roles: ["pmu", "admin"] },
   { to: "/farmer-registry", label: "Farmer Registry", icon: UserPlus, roles: ["pg_manager", "pmu", "admin"] },
-  { to: "/assets", label: "Asset Registry", icon: Warehouse, roles: ["packhouse", "pmu", "admin"] },
+  { to: "/asset-registry", label: "Asset Registry", icon: Warehouse, roles: ["packhouse", "pmu", "admin"] },
   { to: "/profile", label: "Farmer / PG Profile", icon: UserCircle2, roles: ["farmer", "pg_manager", "pmu", "admin"] },
   { to: "/members", label: "PG Member Management", icon: Users, roles: ["pg_manager", "pmu", "admin"] },
   { to: "/crop-plans", label: "Crop Plans", icon: Sprout, roles: ["farmer", "pg_manager", "pmu", "admin"] },

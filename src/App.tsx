@@ -95,7 +95,8 @@ export default function App() {
         <Route path="/farmer-registry/new" element={<Protected><FarmerSurveyWizard /></Protected>} />
         <Route path="/farmer-registry/:key" element={<Protected><FarmerRecordView /></Protected>} />
         <Route path="/farmer-registry/:key/edit" element={<Protected><FarmerSurveyWizard /></Protected>} />
-        <Route path="/assets" element={<Protected><AssetRegistryModule /></Protected>} />
+        {/* Not "/assets": that path is the build's static asset folder and nginx would redirect it. */}
+        <Route path="/asset-registry" element={<Protected><AssetRegistryModule /></Protected>} />
         <Route path="/geo-view" element={<Protected><GeoSingleViewModule /></Protected>} />
         <Route path="/master-data" element={<Protected><MasterDataModule /></Protected>} />
         <Route path="/data-quality" element={<Protected><DataCompletenessModule /></Protected>} />
